@@ -1,0 +1,33 @@
+syntax = "proto3";
+
+option go_package = "genproto/";
+
+package product;
+
+service CategoryService {
+  rpc Create(Category)    returns (C_Void) {}
+  rpc GetById(ByIdCategory) returns (Category) {}
+  rpc GetAll(FilterCategory) returns (GetAllCategoryResp) {}
+  rpc Update(ByIdCategory) returns (C_Void) {}
+  rpc Delete(ByIdCategory) returns (C_Void) {}
+}
+
+message ByIdCategory{
+  string Id = 1;
+}
+
+message FilterCategory {
+  int32 limit = 1;
+  int32 offset = 2;
+}
+
+message C_Void{}
+
+message Category {
+  string Id = 1;
+  string Name = 2;
+}
+
+message GetAllCategoryResp {
+  repeated Category categories = 1;
+}

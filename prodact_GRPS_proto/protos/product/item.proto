@@ -1,0 +1,49 @@
+syntax = "proto3";
+
+option go_package = "genproto/";
+
+package product;
+
+import "basket.proto";
+import "product.proto";
+
+service ItemService {
+    rpc Create(CreateItem) returns (I_Void);
+    rpc GetById(ByIdItem) returns (Item);
+    rpc GetAll(FilterItem) returns (GetAllItemRes);
+    rpc Update(UpdateItem) returns (I_Void);
+    rpc Delete(ByIdItem) returns (I_Void);
+}
+
+message I_Void {}
+
+message CreateItem {
+    string basketID = 1;
+    string productID = 2;
+    int32 quantity = 3;
+}
+
+message ByIdItem {
+    string id = 1;
+}
+
+message FilterItem {
+    string basketID = 1;
+}
+
+message Item {
+    Basket basket = 1;
+    Product product = 2;
+    int32 quantity = 3;
+}
+
+message GetAllItemRes {
+    repeated Item items = 1;
+}
+
+message UpdateItem {
+    string id = 1;
+    string basketID = 2;
+    string productID = 3;
+    int32 quantity = 4;
+}

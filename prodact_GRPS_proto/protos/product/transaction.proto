@@ -1,0 +1,49 @@
+syntax = "proto3";
+
+option go_package =  "genproto/";
+
+package product;
+
+import "basket.proto";
+import "product.proto";
+
+
+
+service TransactionService{
+    rpc Create(TransCreateReq) returns (T_Void) {}
+    rpc GetById(ByIdTrans) returns (Trans) {}
+    rpc GetAll(FilterTrans) returns (GetAllTransResp) {}
+    rpc Update(UpdateTrans) returns (T_Void) {}
+    rpc Delete(ByIdTrans) returns (T_Void) {}
+}
+
+
+message T_Void{}
+
+message TransCreateReq{
+    string basketID  = 1;
+    int32 total_price = 2;
+}
+
+message ByIdTrans{
+    string basketID = 1;
+}
+
+message FilterTrans{
+    string basketID = 1;
+}
+
+message  Trans {
+    Basket basketID   = 1;
+    Product product = 2;
+}
+
+message GetAllTransResp{
+    repeated Trans transes = 1;
+}
+
+
+message UpdateTrans{
+    string basketID  = 1;
+    string productID = 2;
+}

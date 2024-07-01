@@ -1,0 +1,47 @@
+syntax = "proto3";
+
+option go_package = "genproto/";
+
+package product;
+
+
+service UserService {
+  rpc Create(UserCreateReq) returns (U_Void) {}
+  rpc GetById(ByIdUser) returns (User) {}
+  rpc GetAll(FiltePUser) returns (GetAllUserResp) {}
+  rpc Update(User) returns (U_Void) {}
+  rpc Delete(ByIdUser) returns (U_Void) {}
+}
+
+
+message U_Void{}
+
+
+message UserCreateReq {
+    string name =   1;
+    int32 balance = 2;
+    string email =  3;
+    string phone =  4;
+}
+
+
+message ByIdUser {
+    int32 id = 1;
+}
+
+message User {
+    string id =      1;
+    string name =   2;
+    int32 balance = 3;
+    string email =  4;
+    string phone =  5;
+}
+
+message FiltePUser {
+    string name = 1;
+}
+
+
+message GetAllUserResp {
+    repeated User users = 1;
+}

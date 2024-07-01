@@ -1,0 +1,38 @@
+syntax = "proto3";
+
+option go_package = "genproto/";
+
+package product;
+
+import "user.proto";
+
+service BasketService {
+    rpc CreateBasket(CreatedBasket)     returns (B_Void) {}
+    rpc GetByID(ByIdBasket)             returns (Basket) {}
+    rpc GetAll(FilterBasket)            returns (GetAllBasketRes) {}
+    rpc UpdateBasket(ByIdBasket)        returns (B_Void) {}
+    rpc DeleteBasket(ByIdBasket)        returns (B_Void) {}
+}
+
+message B_Void{}
+
+message CreatedBasket {
+    string user_id  = 1;
+}
+
+message ByIdBasket {
+    string id = 1;
+}
+
+message Basket {
+    string id   = 1;
+    User userID = 2;
+}
+
+message FilterBasket {
+    string user_id = 1;
+}
+
+message GetAllBasketRes {
+    repeated Basket baskets = 1;
+}
